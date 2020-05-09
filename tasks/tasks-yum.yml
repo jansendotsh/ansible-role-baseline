@@ -1,0 +1,14 @@
+---
+# CentOS-specific tasks
+- name: Installing packages via YUM
+  yum:
+    name:
+      - vim
+      - git
+      - wget
+      - mtr
+      - libselinux-python
+      - epel-release
+      - bind-utils
+      - sysstat
+      - nmap

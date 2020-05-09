@@ -1,0 +1,14 @@
+---
+# Fedora-specific tasks
+- name: Installing useful packages
+  dnf:
+    name:
+    - mtr
+    - nmap
+    - git
+    - wget
+    - nmap
+    - sysstat
+    - bind-utils
+    - whois
+    - python3-libselinux
