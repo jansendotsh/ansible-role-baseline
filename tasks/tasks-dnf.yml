@@ -1,8 +1,9 @@
 ---
 # Fedora-specific tasks
-- name: Installing useful packages
+- name: Installing useful packages via DNF
   dnf:
     name:
+    - vim
     - mtr
     - nmap
     - git

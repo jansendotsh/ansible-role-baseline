@@ -1,6 +1,6 @@
 ---
 # CentOS-specific tasks
-- name: Installing packages via YUM
+- name: Installing useful packages via YUM
   yum:
     name:
       - vim
