@@ -10,7 +10,7 @@
   register: private_vars
 
 - set_fact: 
-    server_fqdn: "{{ server_hostname }}.{{ server_domain }}"
+    server_fqdn: "{{ server_hostname }}"
 
 - name: Running system updates
   package:
