@@ -13,3 +13,4 @@
     - bind-utils
     - whois
     - python3-libselinux
+    - jq

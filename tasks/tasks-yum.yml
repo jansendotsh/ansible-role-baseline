@@ -12,3 +12,4 @@
       - bind-utils
       - sysstat
       - nmap
+      - jq
