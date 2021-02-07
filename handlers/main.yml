@@ -4,3 +4,8 @@
   service: 
     name: sshd
     state: restarted
+
+- name: restart resolved
+  service:
+    name: systemd-resolved
+    state: restarted

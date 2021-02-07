@@ -15,3 +15,15 @@
     - python3-libselinux
     - jq
     - policycoreutils-python-utils
+
+- name: Fix DNS issue, install Quad9
+  copy:
+    src: "{{ role_path }}/files/resolved.conf"
+    dest: "/etc/systemd/resolved.conf"
+  notify: restart resolved
+
+- name: Set httpd_can_network_connect flag on and keep it persistent across reboots
+  ansible.posix.seboolean:
+    name: httpd_can_network_connect
+    state: yes
+    persistent: yes
