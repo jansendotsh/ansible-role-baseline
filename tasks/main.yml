@@ -44,6 +44,28 @@
     src: "{{ role_path }}/files/nginx/nginxconfig.io/"
     dest: "/etc/nginx/nginxconfig.io/"
 
+- name: Upgrade cryptography package
+  pip:
+    name: cryptography
+    state: latest
+
+- name: Install certbot-dns-digitalocean
+  pip:
+    name: certbot-dns-digitalocean
+    state: latest
+
+- name: Create Diffie-Hellman keys
+  shell: openssl dhparam -out /etc/nginx/dhparam.pem 2048
+
+- name: Create directory for ACME-challenge
+  file:
+    path: /var/www/_letsencrypt
+    state: directory
+    owner: "nginx"
+
+- name: Create DigitalOcean credentials file
+  shell: printf "dns_digitalocean_token = {{ digitalocean_token }}" > /root/digitalocean.ini
+
 - name: Create a secondary, non-root user
   user: 
     name: "{{ nonroot_user }}"

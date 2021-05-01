@@ -13,3 +13,6 @@ nonroot_pass:
 # Leave `git_url` commented out if using github.com
 # git_url: 
 git_user:
+
+# DigitalOcean token
+digitalocean_token: 
