@@ -6,7 +6,8 @@
       - "ansible_pkg_mgr in ('yum', 'dnf')"
 
 - name: Check if vars/private.yml is present
-  stat: path={{ role_path }}/vars/private.yml
+  stat: 
+    path: "{{ role_path }}/vars/private.yml"
   register: private_vars
 
 - set_fact: 
@@ -24,13 +25,15 @@
   command: timedatectl set-timezone 'America/Los_Angeles'
 
 - name: Set up a unique hostname
-  hostname: name={{ server_hostname }}
+  hostname:
+  name: {{ server_hostname }}
 
 - name: Add the server's domain to the hosts file
-  lineinfile: dest=/etc/hosts
-              regexp='.*{{ item }}$'
-              line="{{ hostvars[item].ansible_default_ipv4.address }} {{ server_fqdn }} {{ server_hostname }}"
-              state=present
+  lineinfile: 
+    dest: /etc/hosts
+    regexp: '.*{{ item }}$'
+    line: "{{ hostvars[item].ansible_default_ipv4.address }} {{ server_fqdn }} {{ server_hostname }}"
+    state: present
   when: hostvars[item].ansible_default_ipv4.address is defined
   with_items: "{{ groups['all'] }}"
 
@@ -43,6 +46,11 @@
   copy: 
     src: "{{ role_path }}/files/nginx/nginxconfig.io/"
     dest: "/etc/nginx/nginxconfig.io/"
+
+- name: Copy default Nginx file
+  copy:
+    src: "{{ role_path }}/files/nginx/default.html"
+    dest: "/usr/share/nginx/html/index.html"
 
 - name: Upgrade cryptography package
   pip:
