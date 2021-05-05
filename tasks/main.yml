@@ -10,8 +10,9 @@
     path: "{{ role_path }}/vars/private.yml"
   register: private_vars
 
-- set_fact: 
-    server_fqdn: "{{ server_hostname }}"
+- name: Assign server_fqdn
+  set_fact: 
+   server_fqdn: "{{ server_hostname }}" 
 
 - name: Running system updates
   package:
@@ -26,7 +27,7 @@
 
 - name: Set up a unique hostname
   hostname:
-  name: {{ server_hostname }}
+    name: "{{ server_hostname }}"
 
 - name: Add the server's domain to the hosts file
   lineinfile: 
@@ -51,6 +52,12 @@
   copy:
     src: "{{ role_path }}/files/nginx/default.html"
     dest: "/usr/share/nginx/html/index.html"
+
+- name: Enable and restart Nginx service
+  systemd:
+    name: nginx
+    enabled: yes
+    state: restarted
 
 - name: Upgrade cryptography package
   pip:
