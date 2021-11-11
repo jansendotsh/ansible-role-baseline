@@ -16,3 +16,6 @@ git_user:
 
 # DigitalOcean token
 digitalocean_token: 
+
+# Njalla token
+njalla_token:
