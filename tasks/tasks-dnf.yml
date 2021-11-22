@@ -12,6 +12,7 @@
     - sysstat
     - bind-utils
     - whois
+    - python3-pip
     - python3-libselinux
     - jq
     - policycoreutils-python-utils
