@@ -69,6 +69,11 @@
     name: certbot-dns-digitalocean
     state: latest
 
+- name: Install certbot-dns-njalla
+  pip:
+    name: certbot-dns-njalla
+    state: latest
+
 - name: Create Diffie-Hellman keys
   shell: openssl dhparam -out /etc/nginx/dhparam.pem 2048
 
@@ -81,11 +86,19 @@
 - name: Create DigitalOcean credentials file
   shell: printf "dns_digitalocean_token = {{ digitalocean_token }}" > /root/digitalocean.ini
 
-- name: Set permissions on Cloudflare credentials file
+- name: Set permissions on DigitalOcean credentials file
   file:
     path: /root/digitalocean.ini
     mode: '0600'
 
+- name: Create Njalla credentials file
+  shell: printf "certbot_dns_njalla:dns_njalla_token={{ njalla_token }}" > /root/njalla.ini
+
+- name: Set permissions on Njalla credentials file
+  file:
+    path: /root/njalla.ini
+    mode: '0600'
+  
 - name: Create a secondary, non-root user
   user: 
     name: "{{ nonroot_user }}"

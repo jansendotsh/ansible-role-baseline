@@ -16,6 +16,7 @@
     - python3-libselinux
     - jq
     - policycoreutils-python-utils
+    - checkpolicy
     - nginx
 
 - name: Set httpd_can_network_connect flag on and keep it persistent across reboots
